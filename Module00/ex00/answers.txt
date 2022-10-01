@@ -1,0 +1,15 @@
+# List installed packages
+pip list
+
+# Show the numpy metadata
+pip show numpy
+
+# Remove numpy
+pip uninstall numpy
+
+# (Re)Install numpy
+pip install numpy
+
+# Show installed packages in requirements format
+pip freeze
+
