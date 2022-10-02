@@ -15,6 +15,6 @@ if (len == 1):
         sys.exit('AssertionError: {0}.'.format(e))
 
 elif not (len):
-    sys.exit('Usage: python whois [number]')
+    sys.exit('Usage: python whois <number>')
 elif not (len == 1):
     sys.exit('AssertionError: more than one argument are provided')
