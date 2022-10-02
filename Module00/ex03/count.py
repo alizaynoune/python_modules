@@ -10,20 +10,22 @@ def text_analyzer(text=None):
     pass
     if not text:
         text = input("What is the text to analyze?\n")
-    if text.isnumeric():
-        sys.exit('AssertionError: argument is not a string')
-    textInfo = Counter(
-                                    "lower" if c.islower() else
-                                    "upper" if c.isupper() else
-                                    "space" if c.isspace() else
-                                    "punctuation" if not c.isdigit() else
-                                    'other' for c in text)
+    if isinstance(text, str):
+        textInfo = Counter(
+                                         "lower" if c.islower() else
+                                         "upper" if c.isupper() else
+                                         "space" if c.isspace() else
+                                         "punctuation" if not c.isdigit() else
+                                         'other' for c in text)
 
-    print("The text contains %d character(s):" % len(text))
-    print("- {upper} upper letter(s)\n- {lower} lower letter(s)\
-    ".format(upper=textInfo['upper'], lower=textInfo['lower'],))
-    print("- {punctuation} punctuation mark(s)\n- {space} space(s)\
-    ".format(punctuation=textInfo['punctuation'], space=textInfo['space']))
+        print("The text contains %d character(s):" % len(text))
+        print("- {upper} upper letter(s)\n- {lower} lower letter(s)\
+        ".format(upper=textInfo['upper'], lower=textInfo['lower'],))
+        print("- {punctuation} punctuation mark(s)\n- {space} space(s)\
+        ".format(punctuation=textInfo['punctuation'], space=textInfo['space']))
+
+    else:
+        print('AssertionError: argument is not a string', file=sys.stderr)
 
 
 if __name__ == "__main__":
@@ -32,4 +34,5 @@ if __name__ == "__main__":
     elif (len(sys.argv) == 2):
         text_analyzer(sys.argv[1])
     else:
-        sys.exit('AssertionError: more than one argument are provided')
+        print('AssertionError: more than one argument are provided\
+        ', file=sys.stderr)
