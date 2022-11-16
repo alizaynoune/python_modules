@@ -11,4 +11,4 @@ pip uninstall numpy
 pip install numpy
 
 # Show installed packages in requirements format
-pip freeze
+pip freeze > requirements.txt
