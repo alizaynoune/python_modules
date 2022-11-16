@@ -1,5 +1,12 @@
-kata = (19,42,21)
-# The 3 numbers are: 19, 42, 21 print(my_tuple[0:2])
-# print('The {0} are: {1}'.format(len(kata, (', '.join([str(n) for n in kata])))))
-print('{0}'.format(', '.join([str(n) for n in kata])))
-# print(result)
+kata = (19, 42, 21)
+if isinstance(kata, tuple):
+    if all(isinstance(v, int) for v in kata) and len(kata):
+        print('The {0} are: {1}'.format(len(kata),
+                                        ', '.join([str(n) for n in kata])))
+    elif not len(kata):
+        print("The kata is empty")
+    else:
+        print("The kata don't contain all integers")
+
+else:
+    print('The kata is not tuple')

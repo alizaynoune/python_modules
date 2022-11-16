@@ -11,7 +11,7 @@ if (len == 1):
             print('I\'m {0}.'.format(message))
     except ValueError:
         sys.exit('AssertionError: argument is not an integer')
-    except ValueError as e:
+    except ValueError as e:  # type: ignore
         sys.exit('AssertionError: {0}.'.format(e))
 
 elif not (len):
