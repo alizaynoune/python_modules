@@ -16,5 +16,5 @@ if (len == 1):
 
 elif not (len):
     sys.exit('Usage: python whois <number>')
-elif not (len == 1):
+else:
     sys.exit('AssertionError: more than one argument are provided')
