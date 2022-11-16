@@ -1,0 +1,5 @@
+kata = (19,42,21)
+# The 3 numbers are: 19, 42, 21 print(my_tuple[0:2])
+# print('The {0} are: {1}'.format(len(kata, (', '.join([str(n) for n in kata])))))
+print('{0}'.format(', '.join([str(n) for n in kata])))
+# print(result)

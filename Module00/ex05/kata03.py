@@ -1,0 +1,1 @@
+kata = "The right format"
