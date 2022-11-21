@@ -1,24 +1,16 @@
-from time import sleep
-import sys
+from os import get_terminal_size
+from time import time
 
-# P =	
-# 1.5
-# 30
-# = 0.05 × 100 = 5%
 
 def ft_progress(listy: range):
-    print( listy.stop)
+    columns = get_terminal_size().columns - 60
+    time_start = time()
     for i in listy:
-        # ETA: 8.67s [ 23%][=====> ] 233/1000 | elapsed time 2.33s
-        percent = (i / listy.stop) * 100 
-        print('ETA: [{} %]'.format(percent), end='\r')
+        elapsed_time = time() - time_start
+        percent = (i + 1) / listy.stop
+        print('ETA: {:.2f}s [{:3.0f}%][{:{}.{}}] {}/{} | elapsed time {:.2f}s'.
+              format(((elapsed_time / (percent * 100)) * 100) - elapsed_time,
+                     (percent * 100), ('=' * round(percent * (columns))) + '>',
+                     columns, columns, i + 1, listy.stop, elapsed_time),
+              end='\r')
         yield i
-
-
-listy = range(333)
-ret = 0
-for elem in ft_progress(listy):
-    ret += elem
-    sleep(0.005)
-print()
-print(ret)
