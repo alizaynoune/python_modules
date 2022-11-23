@@ -20,13 +20,21 @@ class Recipe:
         try:
             validation(name, cooking_lvl, cooking_time,
                        ingredients, description, recipe_type)
+            self.name = name
+            self.cooking_lvl = cooking_lvl
+            self.cooking_time = cooking_time
+            self.ingredients = ingredients
+            self.description = description
+            self.recipe_type = recipe_type
+            pass
         except Exception as e:
             print(e)
-        pass
-        # recipe_type (str): can be "starter", "lunch" or "dessert".
 
     def __str__(self) -> str:
-        pass
+        """Return the string to print with the recipe info"""
+        txt = f"name: {self.name}\ntyp: {self.recipe_type}\ncooking time: {self.cooking_time}m\ningredients: {self.ingredients}\ndescription: {self.description}"
+        return txt
 
 
-Recipe('test', 1, 2, ['test'], None, 'dessert')
+Rec = Recipe('test', 1, 2, ['test'], None, 'dessert')
+print(str(Rec))

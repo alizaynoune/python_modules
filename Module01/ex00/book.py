@@ -14,7 +14,6 @@ class Book:
         except Exception as e:
             print(e)
         pass
-    # • recipes_list (dict): a dictionnary with 3 keys: "starter", "lunch", "dessert".
 
     def __str__(self) -> str:
         pass
