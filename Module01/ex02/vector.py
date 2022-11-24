@@ -1,7 +1,35 @@
 class Vector:
     def __init__(self, values) -> None:
-        self.shape = 'shape'
-        self.values = values
+        self.values = [[]]
+        # a list of a list of floats: Vector([[0.0, 1.0, 2.0, 3.0]]),
+        # a list of lists of single float: Vector([[0.0], [1.0], [2.0], [3.0]]),
+        if isinstance(values, list):
+            val_len = len(values)
+            if val_len == 1 and not len(values[0]):
+                raise ValueError('error is empty')
+            for i in values[0] if val_len == 1 else values:
+                if val_len != 1:
+                    if not isinstance(i, list) or not len(i) == 1 or not isinstance(i[0], float):
+                        raise ValueError('error {}'.format(i))
+                else:
+                    if not isinstance(i, float):
+                        raise ValueError('error {}'.format(i))
+
+            self.values = values[:]
+            self.shape = (val_len, len(values[0]) if val_len else 0)
+        # Vector(3) -> the vector will have values = [[0.0], [1.0], [2.0]],
+        elif isinstance(values, int):
+            if values <= 0:
+                print('error')
+            # [c for c in new_list if len(c) > minLen]
+            self.shape = (1, values)
+            self.values = [[float(i) for i in range(values)]]
+        elif isinstance(values, range):
+            if values.start < 0 or values.start >= values.stop:
+                raise ValueError('error {}'.format(values))
+            self.shape = (1, values.stop - values.start)
+            self.values = [[float(i) for i in values]]
+
         pass
 
     def __add__(self, value):

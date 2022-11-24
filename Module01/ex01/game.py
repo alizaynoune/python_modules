@@ -35,13 +35,3 @@ class Lannister(GotCharacter):
 
     def die(self):
         self.is_alive = False
-
-
-# try:
-#     stark = Stark('test')
-#     stark.print_house_words()
-#     stark.die()
-#     print(stark.__dict__)
-#     print(stark.__doc__)
-# except Exception as e:
-#     print(e)
