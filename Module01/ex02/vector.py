@@ -33,10 +33,14 @@ class Vector:
         pass
 
     def __add__(self, value):
-        print('add done')
+        if self.shape[0] >= self.shape[1]:
+            self.values = [[j + value] for i in self.values for j in i]
+        else:
+            self.values = [[j + value for i in self.values for j in i]]
+        return self
 
-    def __radd__(self):
-        print('radd done')
+    def __radd__(self, v):
+        return self.__add__(v)
     # add & radd : only vectors of same shape.
 
     def __sub__(self):
@@ -47,20 +51,30 @@ class Vector:
     # sub & rsub: only vectors of same shape.
 
     def __truediv__(self, value):
-        print('truediv done')
+        if value == 0:
+            raise ValueError('ZeroDivisionError: division by zero.')
+        if self.shape[0] >= self.shape[1]:
+            self.values = [[j / value] for i in self.values for j in i]
+        else:
+            self.values = [[j / value for i in self.values for j in i]]
+        return self
     # truediv : only with scalars (to perform division of Vector by a scalar).
 
     def __rtruediv__(self, value):
-        print(self, value)
+        raise ValueError(
+            'this test can be commented for the other tests and uncommented to show this one')
     # rtruediv : raises an NotImplementedError with the message "Division of a scalar by a Vector is not defined here."
 
     def __mul__(self, value):
-        # for i in self.v:
-        #     print(i)
+        if self.shape[0] >= self.shape[1]:
+            self.values = [[j * value] for i in self.values for j in i]
+        else:
+            self.values = [[j * value for i in self.values for j in i]]
+
         return self
 
-    def __rmul__(self):
-        print('rmul done')
+    def __rmul__(self, v):
+        return self.__mul__(v)
     # mul & rmul: only scalars (to perform multiplication of Vector by a scalar).
 
     def __str__(self):
@@ -71,16 +85,28 @@ class Vector:
     # must be identical, i.e we expect that print(vector) and vector within python interpretor behave the same, see correspond
 
     def dot(self, value):
-        print('dot done')
+        #  res = 0
+        if not isinstance(value, Vector) or self.shape != value.shape:
+            raise ValueError("Vectors must have the same dimensions.")
+        # for i, val in enumerate(self.values):
+        #     if isinstance(val, list):
+        #         res += val[0] * v.values[i][0]
+        #     else:
+        #         res += val * v.values[i]
+        # return res
+        res = 0
+        for i in range(len(self.values)):
+            for j in range(len(self.values[i])):
+                res += self.values[i][j] * value.values[i][j]
+
+        return res
 
     def T(self):
         if self.shape == (1, 1):
             return self
         if self.shape[0] >= self.shape[1]:
-            self.values = [[self.values[i][j] for i in range(
-                len(self.values)) for j in range(len(self.values[i]))]]
+            self.values = [[j for i in self.values for j in i]]
         else:
-            self.values = [[self.values[i][j]] for i in range(
-                len(self.values)) for j in range(len(self.values[i]))]
+            self.values = [[j] for i in self.values for j in i]
         self.shape = (len(self.values), len(self.values[0]))
         return self
