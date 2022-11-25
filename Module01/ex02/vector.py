@@ -16,7 +16,7 @@ class Vector:
                         raise ValueError('error {}'.format(i))
 
             self.values = values[:]
-            self.shape = (val_len, len(values[0]) if val_len else 0)
+            self.shape = (val_len, len(values[0]))
         # Vector(3) -> the vector will have values = [[0.0], [1.0], [2.0]],
         elif isinstance(values, int):
             if values <= 0:
@@ -74,5 +74,13 @@ class Vector:
         print('dot done')
 
     def T(self):
-        print('T done')
+        if self.shape == (1, 1):
+            return self
+        if self.shape[0] >= self.shape[1]:
+            self.values = [[self.values[i][j] for i in range(
+                len(self.values)) for j in range(len(self.values[i]))]]
+        else:
+            self.values = [[self.values[i][j]] for i in range(
+                len(self.values)) for j in range(len(self.values[i]))]
+        self.shape = (len(self.values), len(self.values[0]))
         return self

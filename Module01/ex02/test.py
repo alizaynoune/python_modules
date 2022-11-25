@@ -2,12 +2,19 @@ from vector import Vector
 try:
     v1 = Vector([[0.0], [1.0], [2.0], [3.0]])
     print(v1, v1.shape)
+    print(v1.T(), v1.shape, '<<<T')
     v2 = Vector([[0.1, 1.2, 2.0, 3.0]])
     print(v2, v2.shape)
+    print(v2.T(), v2.shape, '<<<T')
     v3= Vector(4)
     print(v3, v3.shape)
+    print(v3.T(), v3.shape, '<<<T')
     v4= Vector(range(0, 4))
     print(v4, v4.shape)
+    print(v4.T(), v4.shape, '<<<T')
+    v5 = Vector([[0.2]])
+    print(v5, v5.shape)
+    print(v5.T(), v5.shape, '<<<T')
 except Exception as e:
     print(e)
 
