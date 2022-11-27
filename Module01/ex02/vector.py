@@ -7,7 +7,8 @@ class Vector:
                 raise ValueError('error is empty')
             for i in values[0] if val_len == 1 else values:
                 if val_len != 1:
-                    if not isinstance(i, list) or not len(i) == 1 or not isinstance(i[0], float):
+                    if not isinstance(i, list) or not len(i) == 1 or \
+                            not isinstance(i[0], float):
                         raise ValueError('error {}'.format(i))
                 else:
                     if not isinstance(i, float):
@@ -33,9 +34,11 @@ class Vector:
             raise ValueError("Vectors must have the same dimensions.")
 
         if vec.shape[0] >= vec.shape[1]:
-            return Vector([[a[0] + b[0]] for (a, b) in zip(self.values, vec.values)])
+            return Vector(
+                [[a[0] + b[0]] for (a, b) in zip(self.values, vec.values)])
         else:
-            return Vector([[a[0] + b[0] for (a, b) in zip(self.values, vec.values)]])
+            return Vector(
+                [[a[0] + b[0] for (a, b) in zip(self.values, vec.values)]])
 
     def __radd__(self, vec):
         return self.__add__(vec)
@@ -45,9 +48,11 @@ class Vector:
         if not isinstance(vec, Vector) or self.shape != vec.shape:
             raise ValueError("Vectors must have the same dimensions.")
         if vec.shape[0] >= vec.shape[1]:
-            return Vector([[a[0] * b[0]] for (a, b) in zip(self.values, vec.values)])
+            return Vector(
+                [[a[0] * b[0]] for (a, b) in zip(self.values, vec.values)])
         else:
-            return Vector([[a[0] * b[0] for (a, b) in zip(self.values, vec.values)]])
+            return Vector(
+                [[a[0] * b[0] for (a, b) in zip(self.values, vec.values)]])
 
     def __rsub__(self, vec):
         return self.__sub__(vec)
@@ -69,7 +74,9 @@ class Vector:
     def __rtruediv__(self, value):
         raise NotImplementedError(
             'Division of a scalar by a Vector is not defined here.')
-    # rtruediv : raises an NotImplementedError with the message "Division of a scalar by a Vector is not defined here."
+    # rtruediv :
+    # raises an NotImplementedError with the message
+    # "Division of a scalar by a Vector is not defined here."
 
     def __mul__(self, scalar):
         if not isinstance(scalar, int) and not isinstance(scalar, float):
@@ -84,14 +91,16 @@ class Vector:
 
     def __rmul__(self, scalar):
         return self.__mul__(scalar)
-    # mul & rmul: only scalars (to perform multiplication of Vector by a scalar).
+    # mul & rmul:
+    # only scalars (to perform multiplication of Vector by a scalar).
 
     def __str__(self):
         return f'Vector({self.values})'
 
     def __repr__(self):
         return f'<Vector of size {self.shape} {self.values}>'
-    # must be identical, i.e we expect that print(vector) and vector within python interpretor behave the same, see correspond
+    # must be identical, i.e we expect that print(vector) and vector
+    # within python interpretor behave the same, see correspond
 
     def dot(self, value):
         if not isinstance(value, Vector) or self.shape != value.shape:
