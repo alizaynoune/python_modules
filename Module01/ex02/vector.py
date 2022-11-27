@@ -59,7 +59,7 @@ class Vector:
     # sub & rsub: only vectors of same shape.
 
     def __truediv__(self, scalar):
-        if not isinstance(scalar, int) and not isinstance(scalar, float):
+        if not isinstance(scalar, (int, float)):
             raise ValueError('Scalar must be int or float')
         if scalar == 0:
             raise ZeroDivisionError('division by zero.')
@@ -79,7 +79,7 @@ class Vector:
     # "Division of a scalar by a Vector is not defined here."
 
     def __mul__(self, scalar):
-        if not isinstance(scalar, int) and not isinstance(scalar, float):
+        if not isinstance(scalar, (int, float)):
             raise ValueError('Scalar must be int or float')
         res = Vector(self.values)
         if res.shape[0] >= res.shape[1]:
