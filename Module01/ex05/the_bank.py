@@ -32,9 +32,11 @@ class Bank(object):
         """
         # test if new_account is an Account() instance and if
         # it can be appended to the attribute accounts
-        # ... Your code ...
-        print(self.accounts)
-        self.accounts.append(new_account)
+        print(isinstance(new_account, Account))
+        if isinstance(new_account, Account):
+            self.accounts.append(new_account)
+            return True
+        return False
 
     def transfer(self, origin, dest, amount):
         """" Perform the fund transfer
@@ -43,7 +45,15 @@ class Bank(object):
         @amount: float(amount) amount to transfer
         @return True if success, False if an error occured
         """
-        # ... Your code ...
+        if isinstance(origin, str) and isinstance(dest, str) and isinstance(amount, (float, int)) and amount >= 0:
+            dest_account = next(
+                (a for a in self.accounts if a.name == dest), None)
+            origin_account = next(
+                (a for a in self.accounts if a.name == origin), None)
+            if not origin_account or not dest_account:
+                return False
+            return True
+        return False
 
     def fix_account(self, name):
         """ fix account associated to name if corrupted
