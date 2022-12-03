@@ -32,9 +32,32 @@ class Bank(object):
         """
         # test if new_account is an Account() instance and if
         # it can be appended to the attribute accounts
-        print(isinstance(new_account, Account))
         if isinstance(new_account, Account):
+            # if account alredy exists
+            if next((a for a in self.accounts if a.name == new_account.name), None):
+                return False
             self.accounts.append(new_account)
+            return True
+        return False
+
+    def corrupted(self, account):
+        list_attributes = dir(account)
+        # even number of attributes
+        # print('len', len(list_attributes), account.name)
+        if not len(list_attributes) % 2:
+            return True
+        # an attribute starting with 'b'
+        if (next((a for a in list_attributes if a.startswith('b')), None)):
+            return True
+        # no attribute strarting with zip or addr
+        if not (next((a for a in list_attributes if a.startswith('zip')), None))\
+                or not (next((a for a in list_attributes if a.startswith('addr')), None)):
+            return True
+        # no attributes name, id or value
+        if not hasattr(account, 'name') or not hasattr(account, 'id') or not hasattr(account, 'value'):
+            return True
+        # attributes name not being a string , id not beig int, value not being int or float
+        if not isinstance(account.name, str) or not isinstance(account.id, int) or not isinstance(account.value, (int, float)):
             return True
         return False
 
@@ -50,9 +73,15 @@ class Bank(object):
                 (a for a in self.accounts if a.name == dest), None)
             origin_account = next(
                 (a for a in self.accounts if a.name == origin), None)
-            if not origin_account or not dest_account:
+            if not origin_account or not dest_account or origin_account.value < amount:
                 return False
+            if self.corrupted(origin_account) or self.corrupted(dest_account):
+                return False
+            if origin != dest:
+                origin_account.value -= amount
+                dest_account.value += amount
             return True
+
         return False
 
     def fix_account(self, name):
@@ -60,4 +89,17 @@ class Bank(object):
         @name: str(name) of the account
         @return True if success, False if an error occured
         """
-        # ... Your code ...
+        if not isinstance(name, str):
+            return False
+        account = next((a for a in
+                        self.accounts if a.name == name), None)
+        if not account:
+            return False
+        list_attributes = dir(account)
+        if not (next((a for a in list_attributes if a.startswith('zip')), None)):
+            setattr(account, 'zip', 25000)
+        if not (next((a for a in list_attributes if a.startswith('addr')), None)):
+            setattr(account, 'addr', 'Morocco Khouribga')
+        if not hasattr(account, 'info'):
+            setattr(account, 'info', None)
+        return True
