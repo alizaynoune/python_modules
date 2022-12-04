@@ -25,4 +25,3 @@ class Evaluator:
         for i, w in enumerate(words):
             res += len(w) * coefs[i]
         return res
-

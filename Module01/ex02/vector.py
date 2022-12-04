@@ -30,7 +30,8 @@ class Vector:
                     'error the values can be only integers {}'.format(values))
             if len(values) != 2 or values[0] < 0 or values[0] >= values[1]:
                 raise ValueError(
-                    'error the start cannot be less than or equal the end {}'.format(values))
+                    'error the start cannot be less than or equal the end {}'
+                    .format(values))
             self.shape = (values[1] - values[0], 1)
             self.values = [[float(i)] for i in range(values[0], values[1])]
         else:
@@ -68,7 +69,8 @@ class Vector:
         return self.__sub__(vec)
 
     def __truediv__(self, scalar):
-        # truediv : only with scalars (to perform division of Vector by a scalar).
+        # truediv :
+        # only with scalars (to perform division of Vector by a scalar).
         if not isinstance(scalar, (int, float)):
             raise ValueError('Scalar must be int or float')
         if scalar == 0:

@@ -34,7 +34,8 @@ class Bank(object):
         # it can be appended to the attribute accounts
         if isinstance(new_account, Account):
             # if account alredy exists
-            if next((a for a in self.accounts if a.name == new_account.name), None):
+            if next((a for a in self.accounts if a.name == new_account.name),
+                    None):
                 return False
             self.accounts.append(new_account)
             return True
@@ -50,14 +51,19 @@ class Bank(object):
         if (next((a for a in list_attributes if a.startswith('b')), None)):
             return True
         # no attribute strarting with zip or addr
-        if not (next((a for a in list_attributes if a.startswith('zip')), None))\
-                or not (next((a for a in list_attributes if a.startswith('addr')), None)):
+        if not (next((a for a in list_attributes if a.startswith('zip')),
+                     None)) or not (next((a for a in list_attributes
+                                          if a.startswith('addr')), None)):
             return True
         # no attributes name, id or value
-        if not hasattr(account, 'name') or not hasattr(account, 'id') or not hasattr(account, 'value'):
+        if not hasattr(account, 'name') or not hasattr(account, 'id')\
+                or not hasattr(account, 'value'):
             return True
-        # attributes name not being a string , id not beig int, value not being int or float
-        if not isinstance(account.name, str) or not isinstance(account.id, int) or not isinstance(account.value, (int, float)):
+        # attributes name not being a string ,
+        # id not beig int, value not being int or float
+        if not isinstance(account.name, str)\
+                or not isinstance(account.id, int)\
+                or not isinstance(account.value, (int, float)):
             return True
         return False
 
@@ -68,12 +74,14 @@ class Bank(object):
         @amount: float(amount) amount to transfer
         @return True if success, False if an error occured
         """
-        if isinstance(origin, str) and isinstance(dest, str) and isinstance(amount, (float, int)) and amount >= 0:
+        if isinstance(origin, str) and isinstance(dest, str)\
+                and isinstance(amount, (float, int)) and amount >= 0:
             dest_account = next(
                 (a for a in self.accounts if a.name == dest), None)
             origin_account = next(
                 (a for a in self.accounts if a.name == origin), None)
-            if not origin_account or not dest_account or origin_account.value < amount:
+            if not origin_account or not dest_account\
+                    or origin_account.value < amount:
                 return False
             if self.corrupted(origin_account) or self.corrupted(dest_account):
                 return False
@@ -96,14 +104,17 @@ class Bank(object):
         if not account:
             return False
         list_attributes = dir(account)
-        if not (next((a for a in list_attributes if a.startswith('zip')), None)):
+        if not (next((a for a in list_attributes if a.startswith('zip')),
+                     None)):
             setattr(account, 'zip', 25000)
-        if not (next((a for a in list_attributes if a.startswith('addr')), None)):
+        if not (next((a for a in list_attributes if a.startswith('addr')),
+                     None)):
             setattr(account, 'addr', 'Morocco Khouribga')
         if not hasattr(account, 'id') or not isinstance(account.id, int):
             setattr(account, 'id', Account.ID_COUNT)
             Account.ID_COUNT += 1
-        if not hasattr(account, 'value') or not isinstance(account.value, (int, float)):
+        if not hasattr(account, 'value') or not isinstance(account.value,
+                                                           (int, float)):
             setattr(account, 'value', 0)
         if not len(dir(account)) % 2:
             if not hasattr(account, 'info'):
