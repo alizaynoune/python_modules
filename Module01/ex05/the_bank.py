@@ -100,6 +100,16 @@ class Bank(object):
             setattr(account, 'zip', 25000)
         if not (next((a for a in list_attributes if a.startswith('addr')), None)):
             setattr(account, 'addr', 'Morocco Khouribga')
-        if not hasattr(account, 'info'):
-            setattr(account, 'info', None)
+        if not hasattr(account, 'id') or not isinstance(account.id, int):
+            setattr(account, 'id', Account.ID_COUNT)
+            Account.ID_COUNT += 1
+        if not hasattr(account, 'value') or not isinstance(account.value, (int, float)):
+            setattr(account, 'value', 0)
+        if not len(dir(account)) % 2:
+            if not hasattr(account, 'info'):
+                setattr(account, 'info', None)
+            elif not hasattr(account, 'fix_len_attributes'):
+                setattr(account, 'fix_len_attributes', None)
+            else:
+                delattr(account, 'fix_len_attributes')
         return True

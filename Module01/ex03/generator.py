@@ -19,8 +19,7 @@ option precise if a action is performed to the substrings before it is yielded.
     if option == 'shuffle':
         for i in range(len(lst)):
             p1 = randrange(len(lst))
-            p2 = randrange(len(lst))
-            lst[p1], lst[p2] = lst[p2], lst[p1]
+            lst[p1], lst[i] = lst[i], lst[p1]
     elif option == 'unique':
         lst = list(dict.fromkeys(lst))
     elif option == 'ordered':

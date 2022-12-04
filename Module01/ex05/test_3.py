@@ -34,14 +34,20 @@ if __name__ == "__main__":
                             value=42)
 
     bank.add(acc_valid_1)
-    bank.add()
+    bank.add(acc_valid_2)
+    bank.add(acc_invalid_4)
+    bank.add(acc_invalid_1)
+    bank.add(acc_invalid_2)
+    bank.add(acc_invalid_3)
+    bank.add(acc_invalid_5)
 
-    # if bank.transfer('William John', 'Smith Jane', 1000.0) is False:
-    #    print('Failed')
-    #    bank.fix_account('William John')
-    #    bank.fix_account('Smith Jane')
-    # ...
-    # if bank.transfer('William John', 'Smith Jane', 1000.0) is False:
-    #    print('Failed')
-    # else:
-    #    print('Success')
+    if bank.transfer('Douglass', 'Adam', 1000.0) is False:
+        print('Failed')
+    else:
+        print('Success')
+    bank.fix_account('Douglass')
+    bank.fix_account('Adam')
+    if bank.transfer('Douglass', 'Adam', 1000.0) is False:
+        print('Failed')
+    else:
+        print('Success')
