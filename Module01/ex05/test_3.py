@@ -15,7 +15,8 @@ if __name__ == "__main__":
     acc_invalid_4 = Account("Douglass",
                             zip='42',
                             addr='boulevard bessieres',
-                            value=42)
+                            bInfo='fack',
+                            value=4200)
     acc_invalid_1 = Account("Adam",
                             value=42,
                             zip='0',

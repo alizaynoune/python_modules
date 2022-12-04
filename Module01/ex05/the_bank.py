@@ -113,6 +113,10 @@ class Bank(object):
         if not hasattr(account, 'id') or not isinstance(account.id, int):
             setattr(account, 'id', Account.ID_COUNT)
             Account.ID_COUNT += 1
+        attr_b = (next((a for a in list_attributes if a.startswith('b')),
+                       None))
+        if (attr_b):
+            delattr(account, attr_b)
         if not hasattr(account, 'value') or not isinstance(account.value,
                                                            (int, float)):
             setattr(account, 'value', 0)

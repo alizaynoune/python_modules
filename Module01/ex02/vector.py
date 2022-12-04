@@ -59,10 +59,10 @@ class Vector:
             raise ValueError("Vectors must have the same dimensions.")
         if vec.shape[0] >= vec.shape[1]:
             return Vector(
-                [[a[0] * b[0]] for (a, b) in zip(self.values, vec.values)])
+                [[a[0] - b[0]] for (a, b) in zip(self.values, vec.values)])
         else:
             return Vector(
-                [[a[0] * b[0] for (a, b) in zip(self.values, vec.values)]])
+                [[a[0] - b[0] for (a, b) in zip(self.values, vec.values)]])
 
     def __rsub__(self, vec):
         # sub & rsub: only vectors of same shape.
