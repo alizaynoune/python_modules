@@ -1,14 +1,22 @@
 def what_are_the_vars(*args, **kwargs):
     """
-    ...
+    setattr from *args, **kwargs to ObjectC instance
+    @Return obj if success else None
     """
-    # ... Your code here ...
+    obj = ObjectC()
+    for k, v in enumerate(args):
+        setattr(obj, f'var_{k}', v)
+
+    for (k, v) in kwargs.items():
+        if hasattr(obj, k):
+            return None
+        setattr(obj, k, v)
+    return obj
 
 
 class ObjectC(object):
     def __init__(self):
-        # ... Your code here ...
-        ...
+        pass
 
 
 def doom_printer(obj):
