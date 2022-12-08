@@ -8,7 +8,7 @@
 
 ## progress
 
--   progress is a fuctions like tqd
+-   progress is a fuctions like tqdm
 
 ## Insatll
 
