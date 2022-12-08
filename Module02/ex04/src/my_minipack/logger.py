@@ -4,6 +4,9 @@ import functools
 
 
 def logger(func):
+    """
+    write function logger in machine.log
+    """
     @functools.wraps(func)
     def logger_wrapper(*args, **kwargs):
         Ts = time.time()

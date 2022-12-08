@@ -3,6 +3,9 @@ from time import time
 
 
 def progress(listy: range):
+    """
+    show bar progress similar tqdm 
+    """
     columns = get_terminal_size().columns - 60
     time_start = time()
     end = listy.stop - listy.start
