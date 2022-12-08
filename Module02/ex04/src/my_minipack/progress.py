@@ -2,7 +2,7 @@ from os import get_terminal_size
 from time import time
 
 
-def ft_progress(listy: range):
+def progress(listy: range):
     columns = get_terminal_size().columns - 60
     time_start = time()
     end = listy.stop - listy.start

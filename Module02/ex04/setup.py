@@ -1,6 +1,6 @@
-from setuptools import setup
+import setuptools
 
-setup(
+setuptools.setup(
     name='my_minipack',
     version='1.0.0',
     author='Ali Zaynoune',
@@ -9,6 +9,7 @@ setup(
     # license='GPLv3',
     description='Howto create a package in python.',
     long_description=open('README.md').read(),
+    # packages=setuptools.find_packages(where="src"),
     python_requires='>=3.7',
     # Classifiers=[
     #     "Development Status :: 3 - Alpha",

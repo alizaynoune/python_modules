@@ -3,7 +3,7 @@ import os
 import functools
 
 
-def log(func):
+def logger(func):
     @functools.wraps(func)
     def logger_wrapper(*args, **kwargs):
         Ts = time.time()
