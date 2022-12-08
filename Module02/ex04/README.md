@@ -13,7 +13,7 @@
 ## Insatll
 
 ```
-sh setup.sh
+sh build.sh
 ```
 
 # example
