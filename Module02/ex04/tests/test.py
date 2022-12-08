@@ -1,6 +1,6 @@
 from random import randint
 import time
-from my_minipack import progress, logger
+from my_minipack import progressbar, logger
 
 
 class CoffeeMachine():
@@ -22,7 +22,7 @@ class CoffeeMachine():
     def make_coffee(self):
         if self.start_machine():
             print(self.boil_water())
-            for _ in progress(range(20)):
+            for _ in progressbar(range(20)):
                 time.sleep(0.1)
                 self.water_level -= 1
             print()
@@ -31,7 +31,7 @@ class CoffeeMachine():
     @logger
     def add_water(self, water_level):
         r = randint(1, 5)
-        for _ in progress(range(r * 100)):
+        for _ in progressbar(range(r * 100)):
             time.sleep(r / 100)
         self.water_level += water_level
         print()

@@ -1,2 +1,2 @@
 from .logger import logger
-from .progress import progress
+from .progressbar import progressbar

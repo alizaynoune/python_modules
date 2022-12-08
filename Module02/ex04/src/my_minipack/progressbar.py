@@ -2,9 +2,9 @@ from os import get_terminal_size
 from time import time
 
 
-def progress(listy: range):
+def progressbar(listy: range):
     """
-    show bar progress similar tqdm 
+    show bar progressbar similar tqdm 
     """
     columns = get_terminal_size().columns - 60
     time_start = time()
