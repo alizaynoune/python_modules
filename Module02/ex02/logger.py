@@ -10,11 +10,11 @@ def log(func):
         Ts = time.time()
         ret = func(*args, **kwargs)
         Tt = time.time() - Ts
-        fname = ' '.join(func.__name__.split('_')).title()
-        exec_time = f"{Tt * 1000 if Tt < 1 else Tt :.3f} {'ms' if Tt < 1 else 's'}"
+        fn = ' '.join(func.__name__.split('_')).title()
+        e_t = f"{Tt * 1000 if Tt < 1 else Tt :.3f} {'ms' if Tt < 1 else 's'}"
         f = open("machine.log", "a")
         f.write(
-            f"({os.getlogin()})Running: {fname:19}[ exec-time = {exec_time} ]\n")
+            f"({os.environ['USER']})Running: {fn:19}[ exec-time = {e_t} ]\n")
         f.close()
         return ret
     return logger_wrapper

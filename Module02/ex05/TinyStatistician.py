@@ -1,53 +1,40 @@
 import math
 
+
 class TinyStatistician:
     def __init__(self) -> None:
         pass
 
-    def mean(self, l):
-        if not len(l):
+    def mean(self, value):
+        if not len(value):
             return None
         m = 0
-        for i in l:
+        for i in value:
             m += i
-        return float(m / len(l))
+        return float(m / len(value))
 
-    def median(self, l):
-        if not len(l):
+    def median(self, vaule):
+        if not len(vaule):
             return None
-        l.sort()
-        ll = int(len(l) / 2)
-        return float(l[ll])
+        vaule.sort()
+        lv = int(len(vaule) / 2)
+        return float(vaule[lv])
 
-    def quartile(self, l):
-        if not len(l):
+    def quartile(self, vaule):
+        if not len(vaule):
             return None
-        q1 = self.median(l[0:int(len(l) / 2)])
-        q2 = self.median(l[int(len(l) / 2):])
+        q1 = self.median(vaule[0:int(len(vaule) / 2)])
+        q2 = self.median(vaule[int(len(vaule) / 2):])
         return [q1, q2]
 
-    def var(self, l):
-        if not len(l):
+    def var(self, vaule):
+        if not len(vaule):
             return None
-        m = self.mean(l)
-        diff = [(i - m)**2 for i in l]
+        m = self.mean(vaule)
+        diff = [(i - m)**2 for i in vaule]
         return float(self.mean(diff))
 
-    def std(self, l):
-        if not len(l):
+    def std(self, vaule):
+        if not len(vaule):
             return None
-        return float(math.sqrt(self.var(l)))
-
-
-tstat = TinyStatistician()
-a = [1, 42, 300, 10, 59]
-print(tstat.mean(a))
-# Expected result: 82.4
-print(tstat.median(a))
-# Expected result: 42.0
-print(tstat.quartile(a))
-# Expected result: [10.0, 59.0]
-print(tstat.var(a))
-# Expected result: 12279.439999999999
-print(tstat.std(a))
-# Expected result: 110.81263465868862
+        return float(math.sqrt(self.var(vaule)))

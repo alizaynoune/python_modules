@@ -30,19 +30,3 @@ def ft_reduce(function_to_apply, iterable):
         except StopIteration:
             break
     return ret
-
-
-lst = ["H", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
-# lst = None
-def ft(u, v): return u + v
-ft = None
-
-
-try:
-    print(reduce(ft, lst))
-except Exception as e:
-    print(e)
-try:
-    print(ft_reduce(ft, lst))
-except Exception as e:
-    print(e)
