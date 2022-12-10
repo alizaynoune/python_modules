@@ -13,7 +13,7 @@ class NumPyCreator:
             if not all(len(i) == lLen for i in lst):
                 return None
         try:
-            return np.asarray(lst, dtype)
+            return np.array(lst, dtype)
         except:
             return None
 
@@ -21,29 +21,35 @@ class NumPyCreator:
         if not isinstance(tpl, tuple):
             return None
         try:
-            return np.asarray(tpl, dtype)
+            return np.array(tpl, dtype)
         except:
             return None
 
-    def from_iterable(self, itr):
+    def from_iterable(self, itr, dtype=None):
         try:
             iter(itr)
-            return np.asarray(itr)
+            return np.array(itr, dtype)
         except:
             return None
 
-    def from_shape(self, shape, value=0):
-        pass
+    def from_shape(self, shape, value=0, dtype=None):
+        if not isinstance(shape, tuple) or len(shape) != 2 or not all(isinstance(i, int) for i in shape):
+            return None
+        return np.full(shape, value, dtype)
 
     def random(self, shape):
-        pass
+        if not isinstance(shape, tuple) or len(shape) != 2 or not all(isinstance(i, int) for i in shape):
+            return None
+        return np.random.random(shape)
 
-    def identity(self, n):
-        pass
+    def identity(self, n, dtype=None):
+        if not isinstance(n, int):
+            return None
+        return np.identity(n, dtype)
 
 
 npc = NumPyCreator()
-# print(npc.from_list([1, 2, 3, 6, 4], dtype=object))
+# print(npc.from_list([1, 2, 3, 6, 4], dtype=None))
 print(npc.from_list([[1, 2, 3], [6, 3, 4]]))
 # Output :
 # array([[1, 2, 3], [6, 3, 4]])
@@ -67,18 +73,19 @@ print(npc.from_tuple(["a", "b", "c"]))
 print(npc.from_iterable(range(5)))
 # # Output :
 # # array([0, 1, 2, 3, 4])
-# shape = (3, 5)
-# print(npc.from_shape(shape))
+# print(npc.from_iterable([1, 2, 3, 10,]))
+shape = (3, 5)
+print(npc.from_shape(shape))
 # # Output :
 # # array([[0, 0, 0, 0, 0],
 # # [0, 0, 0, 0, 0],
 # # [0, 0, 0, 0, 0]])
-# print(npc.random(shape))
+print(npc.random(shape))
 # # Output :
 # # array([[0.57055863, 0.23519999, 0.56209311, 0.79231567, 0.213768 ],
 # # [0.39608366, 0.18632147, 0.80054602, 0.44905766, 0.81313615],
 # # [0.79585328, 0.00660962, 0.92910958, 0.9905421 , 0.05244791]])
-# print(npc.identity(4))
+print(npc.identity(4))
 # # Output :
 # # array([[1., 0., 0., 0.],
 # # [0., 1., 0., 0.],
