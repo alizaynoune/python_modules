@@ -33,17 +33,17 @@ class NumPyCreator:
             return None
 
     def from_shape(self, shape, value=0, dtype=None):
-        if not isinstance(shape, tuple) or len(shape) != 2 or not all(isinstance(i, int) for i in shape):
+        if not isinstance(shape, tuple) or len(shape) != 2 or not all(isinstance(i, int) and i >= 0 for i in shape):
             return None
         return np.full(shape, value, dtype)
 
     def random(self, shape):
-        if not isinstance(shape, tuple) or len(shape) != 2 or not all(isinstance(i, int) for i in shape):
+        if not isinstance(shape, tuple) or len(shape) != 2 or not all(isinstance(i, int) and i >= 0 for i in shape):
             return None
         return np.random.random(shape)
 
     def identity(self, n, dtype=None):
-        if not isinstance(n, int):
+        if not isinstance(n, int) or n < 0:
             return None
         return np.identity(n, dtype)
 
