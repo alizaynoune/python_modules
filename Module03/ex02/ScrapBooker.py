@@ -22,15 +22,8 @@ class ScrapBooker:
         ------
         This function should not raise any Exception.
         """
-        pass
-
-        # data[0, 1]
-        # 2
-        # data[1:3]
-        # array([[3, 4],
-        #        [5, 6]])
-        # data[0:2, 0]
-        # array([1, 3])
+        # print(array, dim, position)
+        return array[position[0]:dim[0]+position[0], position[1]:dim[1]+position[1]]
 
     def thin(self, array, n, axis):
         """
@@ -49,7 +42,7 @@ class ScrapBooker:
         ------
         This function should not raise any Exception.
         """
-        pass
+        print(array, n, axis)
 
     def juxtapose(self, array, n, axis):
         """
@@ -67,7 +60,7 @@ class ScrapBooker:
         -------
         This function should not raise any Exception.
         """
-        pass
+        # print(array, n, axis)
 
     def mosaic(self, array, dim):
         """
@@ -96,7 +89,7 @@ arr1 = np.arange(0, 25).reshape(5, 5)
 #  [10 11 12 13 14]
 #  [15 16 17 18 19]
 #  [20 21 22 23 24]]
-spb.crop(arr1, (3, 1), (1, 0))
+print(spb.crop(arr1, (3, 1), (1, 0)))
 # Output :
 # array([[ 5],
 # [10],
