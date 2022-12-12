@@ -89,18 +89,11 @@ class ScrapBooker:
         -------
         This function should not raise any Exception.
         """
-        # for i in dim:
-        # print(i)
         if not isinstance(array, np.ndarray) or not isinstance(dim, tuple) or len(dim) != 2 \
                 or not all(isinstance(i, int) and i > 0 for i in dim):
             return None
 
         return np.tile(array, dim)
-
-
-# spb = ScrapBooker()
-# arr4 = np.array([[1, 2, 3]])
-# print(spb.mosaic(arr4, (2, 2)))
 
 
 spb = ScrapBooker()
@@ -131,3 +124,4 @@ print(spb.juxtapose(arr3, 3, 1))
 # # array([[1, 2, 3, 1, 2, 3, 1, 2, 3],
 # # [1, 2, 3, 1, 2, 3, 1, 2, 3],
 # # [1, 2, 3, 1, 2, 3, 1, 2, 3]])
+print(spb.mosaic(arr3, (3, 1)))

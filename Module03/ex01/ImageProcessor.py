@@ -31,6 +31,6 @@ class ImageProcessor:
             return None
 
 
-imP = ImageProcessor()
-ff = imP.load('./42AI.png')
-imP.display(ff)
+# imP = ImageProcessor()
+# ff = imP.load('./42AI.png')
+# imP.display(ff)
