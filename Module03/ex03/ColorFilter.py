@@ -1,6 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
-# import cv2
+from PIL import Image
 
 
 class ColorFilter:
@@ -135,7 +135,19 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        pass
+        if isinstance(array, np.ndarray) is False:
+            return None
+        if not filter in ['w', 'm']:
+            return None
+        weights = [0.2989, 0.5870, 0.1140]
+        print(weights)
+        if filter == 'w':
+            if not ('weights' in kwargs and isinstance(kwargs['weights'], list) and len(kwargs) == 1 and
+                    len(kwargs['weights']) == 3 and all(isinstance(v, float) and v <= 1 for v in kwargs['weights'])):
+                return None
+            weights = kwargs['weights']
+        gray_img = np.sum(array[:, :, 0:3] * weights, axis=2)
+        return gray_img
 
 
 cf = ColorFilter()
@@ -148,16 +160,20 @@ array = plt.imread(imgP)
 #     plt.show()
 
 # im = cf.to_grayscale(array, "m")
-# plt.imshow(array, cmap="gray")
-# plt.axis('off')
-# plt.show()
-
-# im = cf.to_grayscale(array, "w", weights=[0.2126, 0.7152, 0.0722])
 # plt.imshow(im, cmap="gray")
 # plt.axis('off')
 # plt.show()
 
-im = cf.to_celluloid(array)
-plt.imshow(im)
+im = cf.to_grayscale(array, "w", weights=[0.2126, 0.7152, 0.0722])
+plt.imshow(im, cmap="gray")
 plt.axis('off')
 plt.show()
+
+# im = cf.to_celluloid(array)
+# plt.imshow(im)
+# plt.axis('off')
+# plt.show()
+# img = Image.open(imgP)
+# imgGray = img.convert('L')
+# plt.imshow(imgGray, cmap="gray")
+# plt.show()
