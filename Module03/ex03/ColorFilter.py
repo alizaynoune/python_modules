@@ -1,6 +1,4 @@
 import numpy as np
-from matplotlib import pyplot as plt
-from PIL import Image
 
 
 class ColorFilter:
@@ -21,7 +19,8 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        if not isinstance(array, np.ndarray) or len(array.shape) < 3 or array.shape[2] < 3:
+        if not isinstance(array, np.ndarray)\
+                or len(array.shape) < 3 or array.shape[2] < 3:
             return None
         new_arr = array.copy()
         new_arr[:, :, 0:3] = 1.0 - new_arr[:, :, 0:3]
@@ -41,7 +40,8 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        if not isinstance(array, np.ndarray) or len(array.shape) < 3 or array.shape[2] < 3:
+        if not isinstance(array, np.ndarray)\
+                or len(array.shape) < 3 or array.shape[2] < 3:
             return None
         new_arr = array.copy()
         new_arr[:, :, 0:2] = 0
@@ -61,7 +61,8 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        if not isinstance(array, np.ndarray) or len(array.shape) < 3 or array.shape[2] < 3:
+        if not isinstance(array, np.ndarray)\
+                or len(array.shape) < 3 or array.shape[2] < 3:
             return None
         new_arr = array.copy()
         new_arr[:, :, (0, 2)] = 0
@@ -81,7 +82,8 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        if not isinstance(array, np.ndarray) or len(array.shape) < 3 or array.shape[2] < 3:
+        if not isinstance(array, np.ndarray)\
+                or len(array.shape) < 3 or array.shape[2] < 3:
             return None
         new_arr = array.copy()
         new_arr[:, :, 1:3] = 0
@@ -106,13 +108,13 @@ class ColorFilter:
         -------
         This function should not raise any Exception.
         """
-        if isinstance(array, np.ndarray) is False:
+        if isinstance(image, np.ndarray) is False:
             return None
-        thresholds = np.linspace(array.min(), array.max(), 5)
-        new_arr = array.copy()
+        thresholds = np.linspace(image.min(), image.max(), 5)
+        new_arr = image.copy()
         for i in range(1, len(thresholds)):
-            new_arr[(array < thresholds[i]) & (
-                array > thresholds[i - 1])] = thresholds[i]
+            new_arr[(image < thresholds[i]) & (
+                image > thresholds[i - 1])] = thresholds[i]
 
         return new_arr
 
@@ -137,43 +139,15 @@ class ColorFilter:
         """
         if isinstance(array, np.ndarray) is False:
             return None
-        if not filter in ['w', 'm']:
+        if filter not in ['m', 'mean', 'w', 'weight']:
             return None
         weights = [0.2989, 0.5870, 0.1140]
-        print(weights)
-        if filter == 'w':
-            if not ('weights' in kwargs and isinstance(kwargs['weights'], list) and len(kwargs) == 1 and
-                    len(kwargs['weights']) == 3 and all(isinstance(v, float) and v <= 1 for v in kwargs['weights'])):
+        if filter == 'w' or filter == 'weight':
+            if not ('weights' in kwargs and isinstance(kwargs['weights'], list)
+                    and len(kwargs) == 1 and len(kwargs['weights']) == 3
+                    and all(isinstance(v, float)
+                    and v <= 1 for v in kwargs['weights'])):
                 return None
             weights = kwargs['weights']
         gray_img = np.sum(array[:, :, 0:3] * weights, axis=2)
         return gray_img
-
-
-cf = ColorFilter()
-imgP = '../assets/elon_canaGAN.png'
-# imgP = '../assets/42AI.png'
-array = plt.imread(imgP)
-# for f in [cf.to_red, cf.to_green, cf.to_blue, cf.invert]:
-#     plt.imshow(f(array))
-#     plt.axis('off')
-#     plt.show()
-
-# im = cf.to_grayscale(array, "m")
-# plt.imshow(im, cmap="gray")
-# plt.axis('off')
-# plt.show()
-
-im = cf.to_grayscale(array, "w", weights=[0.2126, 0.7152, 0.0722])
-plt.imshow(im, cmap="gray")
-plt.axis('off')
-plt.show()
-
-# im = cf.to_celluloid(array)
-# plt.imshow(im)
-# plt.axis('off')
-# plt.show()
-# img = Image.open(imgP)
-# imgGray = img.convert('L')
-# plt.imshow(imgGray, cmap="gray")
-# plt.show()
