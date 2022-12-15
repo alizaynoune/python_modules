@@ -22,32 +22,28 @@ class KmeansClustering:
         -------
         This function should not raise any Exception.
         """
-        # print(X.shape)
         if not isinstance(X, np.ndarray) or X.shape[0] < self.ncentroid:
             return None
         indexs = np.random.choice(
             X.shape[0] - 1, size=self.ncentroid, replace=False)
         self.centroids = X[indexs]
         distances = [[] for _ in range(self.ncentroid)]
-        clusters = [[] for _ in range(self.ncentroid)]
-        tmpClusters = [[] for _ in range(self.ncentroid)]
-        for i, centeroid in enumerate(self.centroids):
-            distances[i] = (np.linalg.norm(X - centeroid, axis=1))
+        for _ in range(self.max_iter):
+            clusters = [[] for _ in range(self.ncentroid)]
+            for i, centeroid in enumerate(self.centroids):
+                distances[i] = (np.linalg.norm(X - centeroid, axis=1))
 
-        minDistValues = (np.min(distances, axis=0))
-        clustersIndices = (np.argmin(distances, axis=0))
-        for i,v in zip(clustersIndices, minDistValues):
-            tmpClusters[i].append(v)
+            minDistValues = (np.min(distances, axis=0))
+            clustersIndices = (np.argmin(distances, axis=0))
+            for i, v in zip(clustersIndices, minDistValues):
+                clusters[i].append(np.where(distances[i] == v)[0][0])
+            tmp = self.centroids.copy()
+            for i in range(self.ncentroid):
+                self.centroids[i] = np.sum(
+                    X[clusters[i]], axis=0) / len(clusters[i])
 
-        print(tmpClusters[0], '\n<<>>\n', distances[0])
-        # print(np.where(distances[0] == tmpClusters[0]))
-        # tmpClusters = [[v] for i, v in zip(clustersIndices, minDistValues)]
-        # print(minDistValues)
-        # print(clustersIndices)
-        # print(np.where(clustersIndices == 0))
-        # print(len(distances[0]), len(minDistValues),
-        #       len(clustersIndices), clusters)
-
+            if (tmp == self.centroids).all():
+                return None
         return None
 
     def predict(self, X):
@@ -63,7 +59,8 @@ class KmeansClustering:
         -------
         This function should not raise any Exception.
         """
-        pass
+        if not isinstance(X, np.ndarray) or X.shape[0] < self.ncentroid:
+            return None
 
 
 def parse_arg(argv):
@@ -125,6 +122,7 @@ if __name__ == "__main__":
             km = KmeansClustering(
                 max_iter=args['max_iter'], ncentroid=args['ncentroid'])
             km.fit(dataset)
+            km.predict(dataset)
         else:
             print('Error: invalid file')
     else:
