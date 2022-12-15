@@ -28,11 +28,12 @@ class KmeansClustering:
         indexs = np.random.choice(
             X.shape[0] - 1, size=self.ncentroid, replace=False)
         self.centroids = X[indexs]
-        # print(self.centroids)
-        #sq (c.i - x.i)**2 + (c.i - y.i)**2 + (c.i - y.i)**2
-        # np.sqrt(np.sum((a-b)**2,axis=1))
-        # print(np.sqrt(np.sum([1] - [1])**2))
-        print(np.sqrt(np.sum(np.subtract([9, 9, 20], [0, 9, 3])**2)))
+        clusters = []
+        for centeroid in self.centroids:
+            clusters.append(np.linalg.norm(X - centeroid, axis=1))
+
+        print(clusters[0])
+
         return None
 
     def predict(self, X):
