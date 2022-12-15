@@ -141,10 +141,12 @@ class ColorFilter:
             return None
         if filter not in ['m', 'mean', 'w', 'weight']:
             return None
-        weights = [0.2989, 0.5870, 0.1140]
+        if filter in ['m', 'mean'] and len(kwargs.keys()) != 0:
+            return None
+        weights = [1/3, 1/3, 1/3]
         if filter == 'w' or filter == 'weight':
             if not ('weights' in kwargs and isinstance(kwargs['weights'], list)
-                    and len(kwargs) == 1 and len(kwargs['weights']) == 3
+                    and len(kwargs.keys()) == 1 and len(kwargs['weights']) == 3
                     and all(isinstance(v, float)
                     and v <= 1 for v in kwargs['weights'])):
                 return None
