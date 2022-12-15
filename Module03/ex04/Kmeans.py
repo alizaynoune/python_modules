@@ -28,11 +28,25 @@ class KmeansClustering:
         indexs = np.random.choice(
             X.shape[0] - 1, size=self.ncentroid, replace=False)
         self.centroids = X[indexs]
-        clusters = []
-        for centeroid in self.centroids:
-            clusters.append(np.linalg.norm(X - centeroid, axis=1))
+        distances = [[] for _ in range(self.ncentroid)]
+        clusters = [[] for _ in range(self.ncentroid)]
+        tmpClusters = [[] for _ in range(self.ncentroid)]
+        for i, centeroid in enumerate(self.centroids):
+            distances[i] = (np.linalg.norm(X - centeroid, axis=1))
 
-        print(clusters[0])
+        minDistValues = (np.min(distances, axis=0))
+        clustersIndices = (np.argmin(distances, axis=0))
+        for i,v in zip(clustersIndices, minDistValues):
+            tmpClusters[i].append(v)
+
+        print(tmpClusters[0], '\n<<>>\n', distances[0])
+        # print(np.where(distances[0] == tmpClusters[0]))
+        # tmpClusters = [[v] for i, v in zip(clustersIndices, minDistValues)]
+        # print(minDistValues)
+        # print(clustersIndices)
+        # print(np.where(clustersIndices == 0))
+        # print(len(distances[0]), len(minDistValues),
+        #       len(clustersIndices), clusters)
 
         return None
 
