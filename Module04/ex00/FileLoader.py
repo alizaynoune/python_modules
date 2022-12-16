@@ -10,9 +10,9 @@ class FileLoader:
             print('Error: path must be string')
             return None
         try:
-            dataset = pd.read_csv(path, sep=',')
-            print(f"Loading dataset of dimensions {dataset.shape[0]} x {dataset.shape[1]}")
-            return dataset
+            df = pd.read_csv(path, sep=',')
+            print(f"Loading dataset of dimensions {df.shape[0]} x {df.shape[1]}")
+            return df
         except Exception as err:
             print(err)
             return None
@@ -22,11 +22,11 @@ class FileLoader:
             print('Error: df must be pandas.DataFrame and n must be integer')
             return None
         if n >= 0:
-            print(pd.DataFrame(data=df.head(n)))
+            print(df.head(n))
         else:
             print(df.tail(n * -1))
 
 
 loader = FileLoader()
 data = loader.load("../data/athlete_events.csv")
-loader.display(data, 60)
+loader.display(data, 12)
