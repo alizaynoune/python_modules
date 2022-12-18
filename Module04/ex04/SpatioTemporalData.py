@@ -5,8 +5,7 @@ import pandas as pd
 class SpatioTemporalData:
     def __init__(self, data) -> None:
         if not isinstance(data, pd.DataFrame):
-            print('Error')
-            return None
+            raise ValueError('Error: data must be pandas.DataFrame')
         self.data = data
 
     def when(self, location):
