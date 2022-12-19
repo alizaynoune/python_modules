@@ -77,7 +77,8 @@ class MyPlotLib:
 
 
 loader = FileLoader()
-data = loader.load("../data/athlete_events.csv")
+path = "../data/athlete_events.csv"
+data = pd.read_csv(path, sep=',')
 mp = MyPlotLib()
 features = ['Weight', 'Height']
 # features = []
