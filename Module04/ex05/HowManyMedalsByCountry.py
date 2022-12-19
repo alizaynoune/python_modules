@@ -1,7 +1,5 @@
 from FileLoader import FileLoader
 import pandas as pd
-from deepdiff import DeepDiff
-from pprint import pprint
 
 
 def how_many_medals_by_country(dataset, cuntryName):
