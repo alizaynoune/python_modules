@@ -1,7 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
-
 
 
 class Komparator:
@@ -18,32 +16,34 @@ class Komparator:
         except Exception as err:
             print('Error :', err)
             return None
+
     def density(self, categorical_var, numerical_var):
+
         try:
-            
-            # # Converting to wide dataframe
-            # data_wide = self.data.pivot(columns = 'Age', values = 'Sex')
-            # print(data_wide)
-
-            # # plotting multiple density plot
-            # data_wide.plot.kde(figsize = (8, 6), linewidth = 3)
-            # Set figure size for the notebook
-            plt.rcParams["figure.figsize"]=12,8
-
-            # set seaborn whitegrid theme
-            sns.set(style="whitegrid")
-
-            # Without transparency
-            sns.kdeplot(data=self.data, x="Sex", hue="Height", cut=0, fill=True, common_norm=False, alpha=1)
+            categories = self.data[categorical_var].dropna().unique()
+            lines = {}
+            for c in categories:
+                lines[c] = self.data[self.data[categorical_var]
+                                     == c][numerical_var]
+            pd.DataFrame(lines).plot.kde()
+            plt.xlabel(numerical_var)
             plt.show()
-
         except Exception as err:
-            print('Error :', err)
-            return None
+            print('Error: ', err)
 
     def compare_histograms(self, categorical_var, numerical_var):
         try:
-            print('done')
+            categories = self.data[categorical_var].dropna().unique()
+            cat_len = len(categories)
+            for i, c in enumerate(categories):
+                x = self.data.loc[self.data[categorical_var]
+                                  == c, [numerical_var]]
+                plt.hist(x[numerical_var], label=c,  rwidth=(
+                    cat_len - i) / cat_len, edgecolor='black')
+            plt.gca().set(xlabel=numerical_var)
+            plt.grid(True)
+            plt.legend()
+            plt.show()
         except Exception as err:
             print('Error :', err)
             return None
@@ -52,6 +52,6 @@ class Komparator:
 if __name__ == '__main__':
     data = pd.read_csv('../data/athlete_events.csv')
     komp = Komparator(data)
-    # komp.compare_box_plots('Sex', ['Height', 'Weight'])
-    komp.density('Medal', 'Weight')
-    # komp.compare_histograms('Medal', 'Height')
+    # komp.compare_box_plots('Medal', 'Height')
+    # komp.density('Medal', 'Height')
+    komp.compare_histograms('Medal', 'Height')

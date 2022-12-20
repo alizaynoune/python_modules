@@ -80,7 +80,7 @@ mp = MyPlotLib()
 features = ['Weight', 'Height']
 # features = []
 methods = [mp.histogram, mp.density, mp.pair_plot, mp.box_plot]
-methods = [mp.density]
+methods = [mp.histogram]
 for fc in methods:
     fc(data, features)
 
