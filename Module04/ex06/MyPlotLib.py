@@ -1,8 +1,6 @@
-from FileLoader import FileLoader
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
-import seaborn
 
 
 class MyPlotLib:
@@ -76,12 +74,13 @@ class MyPlotLib:
             return None
 
 
-loader = FileLoader()
 path = "../data/athlete_events.csv"
 data = pd.read_csv(path, sep=',')
 mp = MyPlotLib()
 features = ['Weight', 'Height']
 # features = []
-for fc in [mp.histogram, mp.density, mp.pair_plot, mp.box_plot]:
+methods = [mp.histogram, mp.density, mp.pair_plot, mp.box_plot]
+methods = [mp.density]
+for fc in methods:
     fc(data, features)
 
