@@ -13,7 +13,7 @@ class FileLoader:
             fd = pd.read_csv(path, sep=',')
             print(
                 f"Loading dataset of dimensions {fd.shape[0]} x {fd.shape[1]}")
-            return df
+            return fd
         except Exception as err:
             print(err)
             return None
