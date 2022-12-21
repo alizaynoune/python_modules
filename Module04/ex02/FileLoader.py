@@ -10,10 +10,10 @@ class FileLoader:
             print('Error: path must be string')
             return None
         try:
-            dataset = pd.read_csv(path, sep=',')
+            fd = pd.read_csv(path, sep=',')
             print(
-                f"Loading dataset of dimensions {dataset.shape[0]} x {dataset.shape[1]}")
-            return dataset
+                f"Loading dataset of dimensions {fd.shape[0]} x {fd.shape[1]}")
+            return df
         except Exception as err:
             print(err)
             return None

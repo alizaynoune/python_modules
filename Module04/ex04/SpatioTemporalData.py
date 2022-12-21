@@ -1,4 +1,3 @@
-from FileLoader import FileLoader
 import pandas as pd
 
 
@@ -9,7 +8,8 @@ class SpatioTemporalData:
         self.data = data
 
     def when(self, location):
-        if not isinstance(location, str) or not len(location) or not isinstance(self.data, pd.DataFrame):
+        if not isinstance(location, str) or not len(location)\
+                or not isinstance(self.data, pd.DataFrame):
             print('Error')
             return None
         try:
@@ -21,7 +21,8 @@ class SpatioTemporalData:
             return None
 
     def where(self, date):
-        if not isinstance(date, int) or date <= 0 or not isinstance(self.data, pd.DataFrame):
+        if not isinstance(date, int) or date <= 0\
+                or not isinstance(self.data, pd.DataFrame):
             print('Error')
             return None
         try:
@@ -31,13 +32,3 @@ class SpatioTemporalData:
         except Exception as err:
             print('Error: ', err)
             return None
-
-
-loader = FileLoader()
-data = loader.load("../data/athlete_events.csv")
-
-sp = SpatioTemporalData(data)
-print(sp.where(1896))
-print(sp.where(2016))
-print(sp.when('Athina'))
-print(sp.when('Paris'))

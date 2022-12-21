@@ -1,4 +1,3 @@
-from FileLoader import FileLoader
 import pandas as pd
 
 
@@ -14,9 +13,12 @@ def how_many_medals(dataset, name):
 
         for _, row in total.drop_duplicates('Year').iterrows():
             ret[row['Year']] = {
-                'G': (total[(total['Year'] == row['Year']) & (total['Medal'] == 'Gold')])['Medal'].count(),
-                'S': (total[(total['Year'] == row['Year']) & (total['Medal'] == 'Silver')])['Medal'].count(),
-                'B': (total[(total['Year'] == row['Year']) & (total['Medal'] == 'Bronze')])['Medal'].count(),
+                'G': (total[(total['Year'] == row['Year'])
+                            & (total['Medal'] == 'Gold')])['Medal'].count(),
+                'S': (total[(total['Year'] == row['Year'])
+                            & (total['Medal'] == 'Silver')])['Medal'].count(),
+                'B': (total[(total['Year'] == row['Year'])
+                            & (total['Medal'] == 'Bronze')])['Medal'].count(),
 
             }
 
@@ -25,9 +27,3 @@ def how_many_medals(dataset, name):
     except Exception as err:
         print('Error: ', err)
         return None
-
-
-loader = FileLoader()
-data = loader.load("../data/athlete_events.csv")
-res = how_many_medals(data, 'Kjetil Andr Aamodt')
-print(res)

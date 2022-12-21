@@ -26,8 +26,3 @@ class FileLoader:
             print(df.head(n))
         else:
             print(df.tail(n * -1))
-
-
-loader = FileLoader()
-data = loader.load("../data/athlete_events.csv")
-loader.display(data, 12)

@@ -47,11 +47,3 @@ class Komparator:
         except Exception as err:
             print('Error :', err)
             return None
-
-
-if __name__ == '__main__':
-    data = pd.read_csv('../data/athlete_events.csv')
-    komp = Komparator(data)
-    # komp.compare_box_plots('Medal', 'Height')
-    # komp.density('Medal', 'Height')
-    komp.compare_histograms('Medal', 'Height')

@@ -1,6 +1,5 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 class MyPlotLib:
@@ -8,8 +7,9 @@ class MyPlotLib:
         pass
 
     def histogram(self, data, features):
-        if not isinstance(data, pd.DataFrame) or not isinstance(features, list)\
-                or not len(features) or not all(isinstance(i, str) for i in features):
+        if not isinstance(data, pd.DataFrame)\
+                or not isinstance(features, list) or not len(features)\
+                or not all(isinstance(i, str) for i in features):
             print('Error')
             return None
         try:
@@ -30,8 +30,9 @@ class MyPlotLib:
             return None
 
     def density(self, data, features):
-        if not isinstance(data, pd.DataFrame) or not isinstance(features, list)\
-                or not len(features) or not all(isinstance(i, str) for i in features):
+        if not isinstance(data, pd.DataFrame)\
+            or not isinstance(features, list) or not len(features)\
+                or not all(isinstance(i, str) for i in features):
             print('Error')
             return None
         try:
@@ -45,8 +46,9 @@ class MyPlotLib:
             return None
 
     def pair_plot(self, data, features):
-        if not isinstance(data, pd.DataFrame) or not isinstance(features, list)\
-                or not len(features) or not all(isinstance(i, str) for i in features):
+        if not isinstance(data, pd.DataFrame)\
+            or not isinstance(features, list) or not len(features)\
+                or not all(isinstance(i, str) for i in features):
             print('Error')
             return None
         try:
@@ -61,8 +63,9 @@ class MyPlotLib:
             return None
 
     def box_plot(self, data, features):
-        if not isinstance(data, pd.DataFrame) or not isinstance(features, list)\
-                or not len(features) or not all(isinstance(i, str) for i in features):
+        if not isinstance(data, pd.DataFrame)\
+            or not isinstance(features, list) or not len(features)\
+                or not all(isinstance(i, str) for i in features):
             print('Error')
             return None
         try:
@@ -72,15 +75,3 @@ class MyPlotLib:
         except Exception as err:
             print('Error :', err)
             return None
-
-
-path = "../data/athlete_events.csv"
-data = pd.read_csv(path, sep=',')
-mp = MyPlotLib()
-features = ['Weight', 'Height']
-# features = []
-methods = [mp.histogram, mp.density, mp.pair_plot, mp.box_plot]
-methods = [mp.histogram]
-for fc in methods:
-    fc(data, features)
-
