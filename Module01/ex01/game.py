@@ -1,4 +1,7 @@
 class GotCharacter:
+    """
+    GotCharacter class
+    """
     def __init__(self, first_name=None, is_alive=True) -> None:
         self.first_name = first_name
         self.is_alive = is_alive
